@@ -1,10 +1,14 @@
 import { useState } from "react";
 import logo from './logo.svg';
 import './App.css';
-import MovieList from './components/MovieList';
+import Mouvies from './components/Mouvies';
 import Filter from './components/Filter';
 import Add from './components/Add';
-
+import { Routes, Route, Link } from "react-router-dom";
+import Contact from "./components/Contact";
+import About from "./components/About";
+import Navbar from "./components/Navbar";
+import Trailer from "./components/Trailer";
 
 function App() {
   const[movies,setMovies] = useState([  
@@ -120,10 +124,17 @@ function App() {
         }
   return (
     <div>
-      <Filter setText={setText} setRate={setRate}/>
-      <Add addMovie={addMovie}/>
-      <MovieList movies={movies} text={text} rate={rate} />
-     
+      <Navbar/>
+      
+      
+      <Routes>
+        <Route path="/" element={<Mouvies movies={movies} text={text} setText={setText} rate={rate} setRate={setRate} addMovie={addMovie} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/trailer/:name" element={<Trailer movies={movies} />} />
+
+
+      </Routes>
     </div>
   );
 }
